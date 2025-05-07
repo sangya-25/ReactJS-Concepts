@@ -1,5 +1,7 @@
+import { memo } from "react";
+
 function Counter({countValue,onClick}){
-    console.log('this is getting rendered',countValue)
+    console.log(onClick, 'is getting rendered & count is: ',countValue)
     return(
         <div>
             <p>{countValue}</p>
@@ -7,4 +9,4 @@ function Counter({countValue,onClick}){
         </div>
     );
 }
-export default Counter;
+export default memo(Counter);
