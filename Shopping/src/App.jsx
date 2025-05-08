@@ -6,6 +6,7 @@ import ProductList from "./pages/productList"
 import ProductDetails from "./pages/productDetails"
 import CartList from "./pages/cartList"
 import HomePage from './components/Home-page'
+import Checkout from './components/checkOut'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/product-details/:id" element={<ProductDetails/>}/>
       <Route path="/cart-list" element={<CartList/>}/>
       <Route path='/' element={<HomePage/>}/>
+      <Route path='/checkout' element={<Checkout/>}/>
       </Routes>
     </Fragment>
   )
