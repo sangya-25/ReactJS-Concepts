@@ -12,7 +12,7 @@ function Checkout(){
             <img style={{width:"100px", borderRadius:"50%", textAlign:'center'}} src="/src/assets/tick2.jpg" alt="" />
         </div>
         <div>
-        <button onClick={()=>handleOnNavigate('/')} style={{fontSize:'20px',border:"3px solid cornflowerblue",marginTop:'50px', width:"200px"}}>Back to home  <img style={{width:'50px',marginTop:"10px",marginLeft:"50px"}} src="/src/assets/home.png" alt="" /></button>
+        <button onClick={()=>handleOnNavigate('/')} style={{fontSize:'17px',border:"2px solid cornflowerblue",marginTop:'50px', width:"200px"}}>Back to home </button>
         </div>
         </div>
     )

@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import { ShoppingCartContext } from "../../context";
 
 function ProductDetails() {
-    const navigate=useNavigate();
     const {id}=useParams();
-    const {productDetails, setProductDetails,loading,setLoading, handleAddtoCart}=useContext(ShoppingCartContext)
+    const navigate=useNavigate();
+    const {productDetails, setProductDetails,loading,setLoading, handleAddtoCart, cartItems}=useContext(ShoppingCartContext)
     async function fetchProductDetails() {
         const apiResponse=await fetch(`https://dummyjson.com/products/${id}`)
         const result = await apiResponse.json();
@@ -21,6 +21,9 @@ function ProductDetails() {
         return(
             <h1>Fetching Product Details...</h1>
         )
+    }
+    const handleOnNavigate=(route)=>{
+        navigate(route);
     }
     return(
         <div>
@@ -49,7 +52,7 @@ function ProductDetails() {
                             <p style={{marginLeft:'22px'}} className="text-[#333333] text-xl font-bold">$ {productDetails?.price}</p>
                         </div>
                         <div>
-                            <button onClick={()=>handleAddtoCart(productDetails)} style={{marginTop:"20px", border:'10px solid darkgray', width:"200px"}}>Add to Cart</button>
+                            <button className="disabled:opacity-65"  disabled={!productDetails || cartItems.findIndex(item => item.id === productDetails.id) > -1} onClick={()=>handleAddtoCart(productDetails)} style={{marginTop:"20px", border:'10px solid darkgray', width:"200px"}}>Add to Cart</button>
                         </div>
                     </div>
                 </div>

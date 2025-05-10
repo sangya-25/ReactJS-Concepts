@@ -37,19 +37,38 @@ function ShoppingCartProvider({children}){
             })
         }else{
             console.log('item already in the cart!')
+            copyExistingCartItems[findIndexofCurrentItem]={
+                ...copyExistingCartItems[findIndexofCurrentItem],
+                quantity: copyExistingCartItems[findIndexofCurrentItem].quantity+1,
+                totalPrice: (copyExistingCartItems[findIndexofCurrentItem].quantity + 1) * copyExistingCartItems[findIndexofCurrentItem].price
+            }
         }
         setCartItems(copyExistingCartItems);
         localStorage.setItem('cartItems',JSON.stringify(copyExistingCartItems));
         navigate('/cart-list')
     }
-
+    function handleRemovefromcart(getProductDetails, isFullyRemovefromCart){
+        let copyExistingCartItems = [...cartItems];
+        const findIndexofCurrentItem=copyExistingCartItems.findIndex(item=> item.id === getProductDetails.id);
+        if(isFullyRemovefromCart){
+            copyExistingCartItems.splice(findIndexofCurrentItem, 1)
+        }else{
+            copyExistingCartItems[findIndexofCurrentItem]={
+                ...copyExistingCartItems[findIndexofCurrentItem],
+                quantity : copyExistingCartItems[findIndexofCurrentItem].quantity-1,
+                totalPrice : (copyExistingCartItems[findIndexofCurrentItem].quantity-1)*copyExistingCartItems[findIndexofCurrentItem].price
+            };
+        }
+        localStorage.setItem('cartItems',JSON.stringify(copyExistingCartItems));
+        setCartItems(copyExistingCartItems)
+    }
     useEffect(()=>{
         fetchListOfProducts();
-        setCartItems(JSON.parse(localStorage.getItem('cartItems')))
+        setCartItems(JSON.parse(localStorage.getItem('cartItems')|| []))
     },[])
     console.log(listOfProducts);
     return(
-        <ShoppingCartContext.Provider value={{listOfProducts ,loading,setLoading,productDetails, setProductDetails,handleAddtoCart, cartItems,}}>{children}</ShoppingCartContext.Provider>
+        <ShoppingCartContext.Provider value={{listOfProducts ,loading,setLoading,productDetails, setProductDetails,handleAddtoCart, cartItems,handleRemovefromcart,}}>{children}</ShoppingCartContext.Provider>
     )
 }
 export default ShoppingCartProvider;
