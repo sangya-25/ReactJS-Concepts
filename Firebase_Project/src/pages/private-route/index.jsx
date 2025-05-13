@@ -7,7 +7,7 @@ function AuthRoute({children}){
     if (loading) return <h1>Please wait!</h1>
     if(user) return children
     return (
-        <Navigate to={'login'}/>
+        <Navigate to={'/login'}/>
     )
 }
 export default AuthRoute;

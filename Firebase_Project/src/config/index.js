@@ -23,3 +23,17 @@ export const regiseterFormControls=[
         type:'password'
     }
 ]
+export const loginFormControls=[
+     {
+        name:'email',
+        placeholder:'Enter your email',
+        componentType:'input',
+        type:'email'
+    },
+    {
+        name:'password',
+        placeholder:'Enter your password',
+        componentType:'input',
+        type:'password'
+    }
+]

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CommonInput from "../common-input";
 
 const formElementTypes={
@@ -49,6 +50,13 @@ function ComonForm({formControls=[],buttonText, setFormData ,formData, onSubmit}
                 <div key={singleFormControl.name}>{renderFormElements(singleFormControl, formData)}</div>)
             }
             <button style={{border:'4px solid cornflowerblue',borderRadius:"20px"}} type="submit">{buttonText || 'Submit'}</button>
+            <p style={{ color: "cornflowerblue", fontSize: "17px", fontWeight: "bold" }}>
+                {location.pathname === "/login" ? (
+                    <>Don't have an account? <Link to="/register">Register</Link></>
+                ) : (
+                    <>Already have an account? <Link to="/login">Login</Link></>
+                )}
+            </p>
         </form>
     )
 }

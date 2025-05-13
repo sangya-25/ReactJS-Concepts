@@ -4,23 +4,32 @@ import { AuthContext } from "../../context";
 import { regiseterFormControls } from "../../config";
 import { updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import auth from "../../firebaseConfig";
 
 function RegisterPage(){
 
-    const {registerFormData, setRegisterFormData,registerOnsubmit, user, loading}=useContext(AuthContext);
+    const {registerFormData, setRegisterFormData,registerOnsubmit,setLoading}=useContext(AuthContext);
     const navigate=useNavigate();
     function handleRegisterFormSubmit(event){
         event.preventDefault();
         registerOnsubmit().then(result=>{
-            if(result.user){
-                updateProfile(result.user, {displayName: registerFormData.name})
-                navigate('/profile');
-            }
+            updateProfile(result.user, {
+                    displayName: registerFormData.name
+                }).then(()=>{
+                    console.log(
+                        auth.currentUser.displayName,
+                        "auth.currentUser.displayName"
+                    );
+                    if(auth.currentUser.displayName) {
+                        setLoading(false)
+                        navigate("/profile");
+                    }
+                });
         })
 
     }
-    if(loading) return <h1>Please wait!</h1>
-    if(user) navigate('/profile')
+    // if(loading) return <h1>Please wait!</h1>
+    
     return (
         <div className="w-full max-w-sm mx-auto rounded-lg shadow-md">
             <div className="px-6 py-5 ">
