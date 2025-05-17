@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div>
-      <h1 style={{color:'cornflowerblue'}}>BLOG APP</h1>
+      <h1 style={{color:'cornflowerblue',marginBottom:"100px",fontWeight:"bolder"}}>BLOG APP</h1>
       {/* <CounterButton/>
       <CounterValue/> */}
       <AddNewBlog/>
